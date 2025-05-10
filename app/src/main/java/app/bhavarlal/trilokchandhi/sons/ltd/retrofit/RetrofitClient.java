@@ -21,6 +21,7 @@ public class RetrofitClient {
 
         // Add the interceptor to OkHttpClient
         OkHttpClient client = new OkHttpClient.Builder()
+//                .addInterceptor(new TokenInterceptor(token))
                 .addInterceptor(loggingInterceptor)
                 .build();
         if (retrofit == null) {

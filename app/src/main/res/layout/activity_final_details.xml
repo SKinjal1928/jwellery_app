@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:elevation="4dp">
+
+        <!-- Back Button -->
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:fontFamily="@font/poppins_semi_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Generate Bill"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+    </LinearLayout>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <!-- Fine -->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fine" />
+            <TextView
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/et_bg"
+                android:id="@+id/tvFine"
+                android:text="0.00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+                <Spinner
+                    android:background="@drawable/et_bg"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="20dp"
+                    android:id="@+id/spinnerStandard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/fine_standards"
+                    android:spinnerMode="dropdown"
+                    />
+<!--
+                <TextView
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="20dp"
+                    android:background="@drawable/et_bg"
+                    android:id="@+id/tvStandardPurity"
+                    android:text="0.00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>-->
+            </LinearLayout>
+        </LinearLayout>
+            <!-- Old Fine -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Old Fine">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOldFine"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Total Fine -->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Fine" />
+            <TextView
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="18dp"
+                android:background="@drawable/et_bg"
+                android:id="@+id/tvTotalFine"
+                android:text="0.00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- Labour -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Labour">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLabour"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Old Amount -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Old Amount">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOldAmount"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Narration -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Narration">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNarration"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="textCapSentences"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Payment mode"/>
+            <AutoCompleteTextView
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_regular"
+                android:background="@drawable/et_bg"
+                android:padding="15dp"
+                android:id="@+id/search_payment_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Payment mode"
+                android:inputType="text" />
+
+
+            <!-- Submit -->
+
+            <TextView
+                android:gravity="center"
+                android:textSize="18sp"
+                android:background="@drawable/button_bg"
+                android:padding="15dp"
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generate Bill"
+                android:layout_marginTop="24dp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#333333"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

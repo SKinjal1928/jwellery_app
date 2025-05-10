@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:elevation="4dp">
+
+        <!-- Back Button -->
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Title -->
+        <TextView
+            android:fontFamily="@font/poppins_semi_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expense"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/item_expense"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btn_add_expense"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text=""
+        android:textColor="@color/white"
+        app:backgroundTint="@color/purple_200"
+        app:icon="@drawable/ic_add_expense"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</RelativeLayout>

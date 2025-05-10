@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Bhavarlal Trilokchandhi and Sons (P) Ltd.</string>
+    <string-array name="fine_standards">
+        <item>99.5</item>
+        <item>100</item>
+    </string-array>
+
 </resources>

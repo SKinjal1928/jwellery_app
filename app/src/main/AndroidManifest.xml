@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -38,5 +40,54 @@
             android:exported="true">
 
         </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.ProductInfoActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.ExpenseActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.InvoiceDetailActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.FinalDetailsActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.PaymentDetailsActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.ExpenseListActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.InvoiceGenerateActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.StockListActivity"
+            android:exported="true">
+
+        </activity>
+
     </application>
 </manifest>

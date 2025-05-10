@@ -8,8 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import app.bhavarlal.trilokchandhi.sons.ltd.common.SharedPref;
 import app.bhavarlal.trilokchandhi.sons.ltd.databinding.ActivityLoginBinding;
-import app.bhavarlal.trilokchandhi.sons.ltd.model.LoginReq;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.LoginResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.retrofit.RetroInterface;
 import app.bhavarlal.trilokchandhi.sons.ltd.retrofit.RetrofitClient;
@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
+        SharedPref.init(this);
         binding.txtLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private void loginApiCall() {
         binding.progressBar.setVisibility(View.VISIBLE);
         apiInterface = RetrofitClient.getRetrofitInstance().create(RetroInterface.class);
-        LoginReq user = new LoginReq(binding.etUsername.getText().toString() + "", binding.etPassword.getText().toString() + "");
         Call<LoginResponse> call1 = apiInterface.loginApi(binding.etUsername.getText().toString() + "",
                 binding.etPassword.getText().toString() + "");
         call1.enqueue(new Callback<LoginResponse>() {
@@ -48,9 +48,15 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("TAG", response.code() + "");
 
                 if (response.code() == 200) {
+                    String token = response.body().getData().getAccessToken() + "";
+                    String user_id = response.body().getData().getUser().getId() + "";
                     Log.d("Login Token", response.body().getData().getAccessToken() + "");
+                    Log.d("Refresh Token", response.body().getData().getRefreshToken() + "");
+                    SharedPref.putString("token", token);
+                    SharedPref.putString("user_id", user_id);
                     Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(i);
+                    finish();
                    /* token = response.body().getData().getToken();
                     SharedPref.putString("token", token);
                     SharedPref.putString("user", response.body().getData().getUser().getName());

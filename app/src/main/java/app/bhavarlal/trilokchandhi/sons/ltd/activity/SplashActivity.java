@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import app.bhavarlal.trilokchandhi.sons.ltd.common.SharedPref;
 import app.bhavarlal.trilokchandhi.sons.ltd.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
-//        SharedPref.init(SplashActivity.this);
+        SharedPref.init(SplashActivity.this);
         startNextScreen();
 
     }
@@ -27,11 +28,11 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                if (!SharedPref.getString("token", "").isEmpty()) {
-//                    startDashboard();
-//                } else {
+                if (!SharedPref.getString("token", "").isEmpty()) {
+                    startDashboard();
+                } else {
                 startLogin();
-//                }
+                }
 
             }
         }, 3000);
