@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@android:color/white">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,17 +15,6 @@
         android:background="@android:color/white"
         android:gravity="center_vertical"
         android:elevation="4dp">
-
-        <!-- Back Button -->
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_back"
-        android:contentDescription="Back"
-        android:layout_marginEnd="16dp" />
-
         <!-- Title -->
         <TextView
             android:fontFamily="@font/poppins_semi_bold"
@@ -33,186 +23,260 @@
             android:text="Customer"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#333333"/>
+            android:textColor="#333333" />
+        <!-- Back Button -->
+        <ImageView
+            android:rotation="180"
+            android:layout_gravity="center"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp" />
+
+
     </LinearLayout>
 
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="8dp"
-    android:background="@android:color/transparent">
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="24dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <EditText
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_regular"
-            android:drawablePadding="5dp"
-            android:padding="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/et_bg"
-            android:id="@+id/et_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Select Date"
-            android:focusable="false"
-            android:clickable="true"
-            android:inputType="none"
-            android:drawableEnd="@android:drawable/ic_menu_my_calendar" />
-
-
-        <!-- Name of Purchaser -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name of Purchaser"
-            android:layout_marginTop="8dp"/>
-
-
-        <!-- Name Field -->
-        <AutoCompleteTextView
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_regular"
-            android:id="@+id/searchAutoComplete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/et_bg"
-            android:hint="Search customer"
-            android:inputType="text"
-            android:padding="15dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Address"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-            >
-
-
-            <com.google.android.material.textfield.TextInputEditText
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="15dp"
                 android:layout_width="match_parent"
-                android:id="@+id/txt_address"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_gravity="center"
+                android:layout_weight="0.4"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_regular"
+                android:padding="7dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/et_bg"
+                android:id="@+id/et_date"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPostalAddress"/>
+                android:hint="Select Date"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"/>
+            <LinearLayout
+                android:layout_marginHorizontal="5dp"
+                android:gravity="center"
+                android:layout_weight="0.6"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <!-- Name Field -->
+                <AutoCompleteTextView
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:id="@+id/searchAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/et_bg"
+                    android:hint="Search customer"
+                    android:inputType="text"
+                    android:padding="7dp" />
 
-        <!-- Email Field -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Invoice No"
-            android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#000000"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusTopStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:boxCornerRadiusBottomEnd="8dp"
-            >
+            </LinearLayout>
+        </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Gender -->
+                <TextView
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:background="@drawable/et_bg"
+                    android:id="@+id/txt_address"
+                    android:hint="Address"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    <!--    &lt;!&ndash; Password &ndash;&gt;
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Less"
-            android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
+                <TextView
+                    android:visibility="gone"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="17dp"
+                    android:background="@drawable/et_bg"
+                    android:id="@+id/txt_phone"
+                    android:hint="Mobile No"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:fontFamily="@font/poppins_regular"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                <!-- Email Field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Invoice No"
+                    android:layout_marginTop="10dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxStrokeColor="#000000"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cash"
-            android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:id="@+id/ll_rv"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:elevation="4dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                        <!-- Title -->
+                        <TextView
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Item Listing"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Issue Date"
-            android:layout_marginTop="10dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:id="@+id/txt_next"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+ADD"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#333333"/>
+                    </RelativeLayout>
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingVertical="4dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:fontFamily="@font/poppins_regular"
+                            android:id="@+id/txtProductName"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:text="Item"
+                            android:textColor="@color/black" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="NW"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="10dp">
+                        <TextView
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="@color/black"
+                            android:id="@+id/txtQuantity"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Qty" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:fontFamily="@font/poppins_regular"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:fontFamily="@font/poppins_regular"
+                            android:id="@+id/txt_net_wt"
+                            android:layout_width="0dp"
+                            android:layout_weight="1.5"
+                            android:layout_height="wrap_content"
+                            android:text="N.W"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:fontFamily="@font/poppins_regular"
+                            android:id="@+id/txt_p_w"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:text="P+W"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:fontFamily="@font/poppins_regular"
+                            android:id="@+id/txt_fine"
+                            android:layout_width="0dp"
+                            android:layout_weight="1.5"
+                            android:layout_height="wrap_content"
+                            android:text="Fine"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:fontFamily="@font/poppins_regular"
+                            android:id="@+id/txt_labour_amt"
+                            android:layout_width="0dp"
+                            android:layout_weight="1.5"
+                            android:layout_height="wrap_content"
+                            android:text="L.A"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
 
--->        <!-- Send Button -->
-        <TextView
-            android:gravity="center"
-            android:textSize="18sp"
-            android:background="@drawable/button_bg"
-            android:padding="15dp"
-            android:id="@+id/btn_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Continue"
-            android:layout_marginTop="24dp"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#333333"/>
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        tools:listitem="@layout/product_item"
+                        android:id="@+id/rv_list_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
+                    <!-- Bottom Loading Indicator -->
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginTop="8dp"/>
 
-    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="@drawable/button_bg"
+                    android:padding="15dp"
+                    android:id="@+id/btn_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Continue"
+                    android:layout_marginTop="24dp"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="#333333" />
 
-</androidx.cardview.widget.CardView>
-</ScrollView>
+            </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

@@ -57,11 +57,15 @@ public class ExpenseActivity extends AppCompatActivity {
         expense = (ExpenseListResponse.Datum) getIntent().getSerializableExtra("expense");
         if(expense != null){
             binding.etPlaceLodging.setText(expense.getNamePlace()+"");
-            binding.editTextDate.setText(expense.getDate().toString()+"");
+            binding.editTextDate.setText(expense.getDate_dmy().toString()+"");
             binding.etAmtLodging.setText(expense.getLodging().toString()+"");
+            binding.etCommentLodging.setText(expense.getLodging_comment() == null ? "" :expense.getLodging_comment().toString()+"");
             binding.etAmtTravelling.setText(expense.getTravelling().toString()+"");
+            binding.etCommentTravell.setText(expense.getTravelling_comment() == null ? "" :expense.getTravelling_comment().toString()+""+"");
             binding.etAmtFood.setText(expense.getFood().toString()+"");
-            binding.emOther.setText(expense.getOther().toString()+"");
+
+            binding.emOther.setText(expense.getOther() == null ? "" :expense.getOther().toString()+"");
+            binding.etCommentOther.setText(expense.getOther_comment() == null ? "" :expense.getOther_comment().toString()+"");
             binding.btnNext.setText("Update Expense");
             binding.txtTitle.setText("Update Expense");
         }
@@ -87,6 +91,13 @@ public class ExpenseActivity extends AppCompatActivity {
                 showOrderDatePickerDialog(binding.editTextDate);
             }
         });
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
@@ -94,7 +105,8 @@ public class ExpenseActivity extends AppCompatActivity {
         expenses.add(new ExpenseRequest.ExpenseItem(binding.etPlaceLodging.getText().toString(),
                 binding.editTextDate.getText().toString(), binding.etAmtLodging.getText().toString(),
                 binding.etAmtTravelling.getText().toString(), binding.etAmtFood.getText().toString(),
-                binding.emOther.getText().toString()));
+                binding.emOther.getText().toString(), binding.etCommentLodging.getText().toString(),
+                binding.etCommentTravell.getText().toString(), binding.etCommentOther.getText().toString()));
         ExpenseRequest request = new ExpenseRequest(Integer.parseInt(SharedPref.getString("delivery_id", "")),
                 Integer.parseInt(SharedPref.getString("user_id", "")), expenses);
 
@@ -128,7 +140,8 @@ public class ExpenseActivity extends AppCompatActivity {
         expenses_update = new ExpenseUpdateReq(expense.getId().toString(),binding.etPlaceLodging.getText().toString(),
                 binding.editTextDate.getText().toString(), binding.etAmtLodging.getText().toString(),
                 binding.etAmtTravelling.getText().toString(), binding.etAmtFood.getText().toString(),
-                binding.emOther.getText().toString());
+                binding.emOther.getText().toString(), binding.etCommentLodging.getText().toString(),
+                binding.etCommentTravell.getText().toString(), binding.etCommentOther.getText().toString());
 
 //        ExpenseUpdateReq request = new ExpenseUpdateReq(Integer.parseInt(SharedPref.getString("delivery_id", "")),
 //                Integer.parseInt(SharedPref.getString("user_id", "")), expenses_update);

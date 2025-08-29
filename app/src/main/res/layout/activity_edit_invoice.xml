@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Main content -->
+    <LinearLayout
+        android:id="@+id/linearLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Update"
+            android:textSize="22sp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/gridSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:useDefaultMargins="true">
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="32dp">
+
+                <!-- Your custom card (with arrow overlapping) -->
+                <FrameLayout
+                    android:id="@+id/layout_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+                    <ImageButton
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginBottom="-20dp"
+                        android:src="@drawable/ic_arrow"
+                        android:rotation="90"
+                        android:background="@drawable/round_blue_button"
+                        android:scaleType="centerInside"
+                        android:contentDescription="Navigate"
+                        android:elevation="8dp"
+                        android:tint="#FFFFFF" />
+                    <!-- CardView with content -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        android:background="@android:color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="24dp">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_person"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:text="Customer"
+                                android:textSize="16sp"
+                                android:textColor="#000000" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Card + Floating ImageButton (same code from before) -->
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="32dp">
+
+                <!-- Your custom card (with arrow overlapping) -->
+                <FrameLayout
+                    android:id="@+id/layout_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+                    <ImageButton
+                        android:id="@+id/imgArrow1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginBottom="-20dp"
+                        android:src="@drawable/ic_arrow"
+                        android:background="@drawable/round_blue_button"
+                        android:scaleType="centerInside"
+                        android:contentDescription="Navigate"
+                        android:elevation="8dp"
+                        android:rotation="90"
+                        android:tint="#FFFFFF" />
+                    <!-- CardView with content -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        android:background="@android:color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="24dp">
+
+                            <ImageView
+                                android:id="@+id/imgIcon1"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ic_product"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:id="@+id/txtTitle1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"                                android:text="Product"
+                                android:textSize="16sp"
+                                android:textColor="#000000" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Card + Floating ImageButton (same code from before) -->
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+            <!-- Item 1 -->
+            <!--<include layout="@layout/item_setting_card"
+                android:id="@+id/cardHoursWorked" />
+            &lt;!&ndash; Item 2 &ndash;&gt;
+            <include layout="@layout/item_setting_card"
+                android:id="@+id/cardPayPeriod" />
+            &lt;!&ndash; Item 3 &ndash;&gt;
+            <include layout="@layout/item_setting_card"
+                android:id="@+id/cardWageDetails" />-->
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:useDefaultMargins="true">
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="32dp">
+
+                <!-- Your custom card (with arrow overlapping) -->
+                <FrameLayout
+                    android:id="@+id/layout_bill_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+                    <ImageButton
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginBottom="-20dp"
+                        android:src="@drawable/ic_arrow"
+                        android:background="@drawable/round_blue_button"
+                        android:scaleType="centerInside"
+                        android:contentDescription="Navigate"
+                        android:elevation="8dp"
+                        android:rotation="90"
+                        android:tint="#FFFFFF" />
+                    <!-- CardView with content -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        android:background="@android:color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="24dp">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/shipment"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="Bill Details"
+                                android:layout_marginVertical="10dp"
+                                android:textSize="16sp"
+                                android:textColor="#000000" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Card + Floating ImageButton (same code from before) -->
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingBottom="32dp">
+
+                <!-- Your custom card (with arrow overlapping) -->
+                <FrameLayout
+                    android:id="@+id/layout_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+                    <ImageButton
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginBottom="-20dp"
+                        android:src="@drawable/ic_arrow"
+                        android:background="@drawable/round_blue_button"
+                        android:scaleType="centerInside"
+                        android:contentDescription="Navigate"
+                        android:elevation="8dp"
+                        android:rotation="90"
+                        android:tint="#FFFFFF" />
+                    <!-- CardView with content -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="140dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        android:background="@android:color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:paddingTop="24dp">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/expense"
+                                android:layout_gravity="center" />
+
+                            <TextView
+                                android:fontFamily="@font/poppins_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="Payment"
+                                android:layout_marginVertical="10dp"
+                                android:textSize="16sp"
+                                android:textColor="#000000" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Card + Floating ImageButton (same code from before) -->
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+            <!-- Item 1 -->
+            <!--<include layout="@layout/item_setting_card"
+                android:id="@+id/cardHoursWorked" />
+            &lt;!&ndash; Item 2 &ndash;&gt;
+            <include layout="@layout/item_setting_card"
+                android:id="@+id/cardPayPeriod" />
+            &lt;!&ndash; Item 3 &ndash;&gt;
+            <include layout="@layout/item_setting_card"
+                android:id="@+id/cardWageDetails" />-->
+        </LinearLayout>
+
+        <TextView
+            android:fontFamily="@font/poppins_regular"
+            android:layout_gravity="center|right"
+            android:gravity="center|right"
+            android:textSize="18sp"
+            android:background="@drawable/button_bg"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:id="@+id/btn_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:layout_marginTop="24dp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#333333"/>
+    </LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,21 +15,10 @@
     android:gravity="center_vertical"
     android:elevation="4dp">
 
-    <!-- Back Button -->
-    <ImageView
-        android:layout_centerInParent="true"
-        android:layout_alignParentLeft="true"
-        android:layout_gravity="center"
-        android:id="@+id/back_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_arrow_back"
-        android:contentDescription="Back"
-        android:layout_marginEnd="16dp" />
-
     <!-- Title -->
     <TextView
-        android:layout_toRightOf="@+id/back_button"
+        android:id="@+id/txt_title"
+        android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
         android:fontFamily="@font/poppins_semi_bold"
         android:layout_width="wrap_content"
@@ -38,6 +27,21 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="#333333"/>
+
+
+    <!-- Back Button -->
+    <ImageView
+        android:rotation="180"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/txt_title"
+        android:layout_gravity="center"
+        android:id="@+id/back_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="Back"
+        android:layout_marginEnd="16dp" />
+
 
     <ImageView
         android:id="@+id/add_another_product"
@@ -52,9 +56,8 @@
         android:src="@drawable/ic_add_expense"
         android:tint="@color/black" />
 </RelativeLayout>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
+<ScrollView
+    android:padding="15dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -65,14 +68,15 @@
 
         <!-- Item Name -->
         <TextView
+            android:fontFamily="@font/poppins_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Select Item"/>
         <AutoCompleteTextView
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
             android:background="@drawable/et_bg"
-            android:padding="15dp"
+            android:padding="10dp"
             android:id="@+id/search_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,7 +85,6 @@
 
         <!-- Pcs -->
         <com.google.android.material.textfield.TextInputLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pcs"
@@ -90,80 +93,91 @@
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPcs"
+                android:padding="10dp"
                 android:inputType="number"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <!-- Gross Weight -->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:hint="Gross Weight (GW)"
-            android:layout_marginTop="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etGW"
-                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="numberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:padding="8dp"
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Less -->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:hint="Less"
-            android:layout_marginTop="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginHorizontal="5dp"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLess"
-                android:textSize="16sp"
+                android:padding="8dp"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
-                android:layout_marginTop="10dp"
                 android:inputType="numberDecimal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Net Weight (calculated) -->
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Net Weight (NW)"
-            />
-        <TextView
-            android:textSize="16sp"
+            android:layout_gravity="center|bottom"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="17dp"
             android:background="@drawable/et_bg"
             android:id="@+id/tvNW"
             android:text="0.00"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
+    </LinearLayout>
+        <LinearLayout
+    android:layout_marginTop="10dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <!-- Purity -->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Purity"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPurity"
-                android:textSize="16sp"
+                android:textSize="14sp"
+                android:padding="10dp"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="numberDecimal"
                 android:layout_width="match_parent"
@@ -172,97 +186,151 @@
 
         <!-- Wastage -->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Wastage"
-            android:layout_marginTop="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etWastage"
-                android:textSize="16sp"
+                android:padding="10dp"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
-
+    </LinearLayout>
         <!-- Fine (calculated) -->
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fine" />
-
-        <!-- Labour Rate -->
+    <!--<LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">-->
         <TextView
             android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fine" />
+        <!--<TextView
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Labour Rate" /></LinearLayout>-->
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- Labour Rate -->
+        <TextView
+            android:layout_marginVertical="4dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
             android:id="@+id/tvFine"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/et_bg"
             android:paddingHorizontal="10dp"
-            android:paddingVertical="17dp"
+            android:paddingVertical="10dp"
             android:text="0.00"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Labour Rate"
+            android:layout_gravity="center|top"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLabourRate"
-                android:textSize="16sp"
+                android:layout_gravity="center|top"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="8dp"
+                android:textSize="14sp"
+                android:text="0"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Rate On -->
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rate On"/>
+    </LinearLayout>
 
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <!-- Rate On -->
+            <TextView
+                android:fontFamily="@font/poppins_regular"
+                android:layout_gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate On"/>
         <AutoCompleteTextView
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
             android:background="@drawable/et_bg"
-            android:padding="15dp"
+            android:padding="10dp"
             android:id="@+id/search_rate_applied"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Rate applied on"
             android:inputType="text" />
-        <!-- Labour Amount -->
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Labour Amount"
-            android:layout_marginTop="10dp"/>
-        <TextView
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_regular"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="17dp"
-            android:background="@drawable/et_bg"
-            android:id="@+id/tvLAmount"
-            android:text="0.00"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="18sp"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <!-- Labour Amount -->
+            <TextView
+                android:fontFamily="@font/poppins_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Labour Amount"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+
+                android:id="@+id/tvLAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:text="0.00"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+        <TextView
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:textSize="16sp"
             android:background="@drawable/button_bg"
             android:padding="15dp"
             android:id="@+id/btn_next"

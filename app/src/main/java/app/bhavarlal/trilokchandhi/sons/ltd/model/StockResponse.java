@@ -67,18 +67,27 @@ public class StockResponse {
         @SerializedName("id")
         @Expose
         private Integer id;
+
+        @SerializedName("product_id")
+        @Expose
+        private Integer product_id;
+
         @SerializedName("productName")
         @Expose
         private String productName;
+
         @SerializedName("purity")
         @Expose
         private String purity;
+
         @SerializedName("finalQuantity")
         @Expose
         private Integer finalQuantity;
+
         @SerializedName("finalGrossWeight")
         @Expose
         private Double finalGrossWeight;
+
         @SerializedName("finalLessWeight")
         @Expose
         private Double finalLessWeight;
@@ -129,6 +138,14 @@ public class StockResponse {
 
         public void setId(Integer id) {
             this.id = id;
+        }
+
+        public Integer getProduct_id() {
+            return product_id;
+        }
+
+        public void setProduct_id(Integer product_id) {
+            this.product_id = product_id;
         }
 
         @Override

@@ -32,9 +32,28 @@ public class LoginActivity extends AppCompatActivity {
         binding.txtLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginApiCall();
+                if(validateInputs()) {
+                    loginApiCall();
+                }
             }
         });
+    }
+    private boolean validateInputs() {
+
+        boolean isValid = true;
+
+        if (binding.etUsername.getText().toString().trim().isEmpty()) {
+            binding.etUsername.setError("Enter Username");
+            isValid = false;
+        }
+
+        if (binding.etPassword.getText().toString().trim().isEmpty()) {
+            binding.etPassword.setError("Enter Password");
+            isValid = false;
+        }
+        // Add checks for other fields similarly if required
+        return isValid;
+
     }
     private void loginApiCall() {
         binding.progressBar.setVisibility(View.VISIBLE);
@@ -50,10 +69,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     String token = response.body().getData().getAccessToken() + "";
                     String user_id = response.body().getData().getUser().getId() + "";
+                    String user_name = response.body().getData().getUser().getFirst_name() + " " +
+                            response.body().getData().getUser().getLast_name() +"";
                     Log.d("Login Token", response.body().getData().getAccessToken() + "");
                     Log.d("Refresh Token", response.body().getData().getRefreshToken() + "");
                     SharedPref.putString("token", token);
                     SharedPref.putString("user_id", user_id);
+                    SharedPref.putString("user", user_name);
                     Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(i);
                     finish();

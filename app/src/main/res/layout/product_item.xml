@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    android:gravity="center"
+    android:paddingVertical="4dp">
+
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:id="@+id/txtProductName"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="Gold Ring"
+        android:textColor="#000000" />
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:id="@+id/txtQuantity"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Qty: 2" />
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:id="@+id/txt_net_wt"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textStyle="bold"
+        android:textColor="#1A237E" />
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:id="@+id/txt_p_w"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="76+10"
+        android:textStyle="bold"
+        android:textColor="#1A237E" />
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:id="@+id/txt_fine"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+        android:text="₹100"
+        android:textStyle="bold"
+        android:textColor="#1A237E" />
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        android:id="@+id/txt_labour_amt"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+        android:text="₹1000"
+        android:textStyle="bold"
+        android:textColor="#1A237E" />
+    <ImageView
+        android:layout_weight="0.5"
+        android:layout_gravity="center"
+        android:id="@+id/btn_delete"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_delete"
+        android:contentDescription="Back" />
+</LinearLayout>

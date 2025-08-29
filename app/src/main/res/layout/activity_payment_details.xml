@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,15 +16,6 @@
         android:gravity="center_vertical"
         android:elevation="4dp">
 
-        <!-- Back Button -->
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_back"
-            android:contentDescription="Back"
-            android:layout_marginEnd="16dp" />
 
         <!-- Title -->
         <TextView
@@ -34,8 +26,23 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#333333"/>
+
+        <!-- Back Button -->
+        <ImageView
+            android:rotation="180"
+            android:layout_gravity="center"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp" />
+
     </LinearLayout>
-    <ScrollView
+
+
+    <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
         android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -44,7 +51,10 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -54,28 +64,32 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etGoldRate"
                     android:textSize="16sp"
+                    android:paddingVertical="8dp"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="numberDecimal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/llGST"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Amount" />
             <TextView
                 android:textSize="16sp"
+                android:paddingVertical="8dp"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="20dp"
                 android:background="@drawable/et_bg"
                 android:id="@+id/tvAmount"
                 android:text="0.00"
@@ -84,15 +98,16 @@
 
             <!-- Total Fine -->
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="GSt(3%)" />
             <TextView
+                android:paddingVertical="8dp"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="18dp"
                 android:background="@drawable/et_bg"
                 android:id="@+id/tvGstPercentage"
                 android:text="0.00"
@@ -107,12 +122,14 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:fontFamily="@font/poppins_regular"
                         android:id="@+id/radio_cheque"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cheque"/>
 
                     <RadioButton
+                        android:fontFamily="@font/poppins_regular"
                         android:id="@+id/radio_rtgs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -120,7 +137,7 @@
                 </RadioGroup>
 
                 <LinearLayout
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/llCheque"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -144,6 +161,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etChqNo"
                             android:textSize="16sp"
+                            android:paddingVertical="8dp"
                             android:fontFamily="@font/poppins_regular"
                             android:inputType="numberDecimal"
                             android:layout_width="match_parent"
@@ -160,8 +178,10 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etChqDate"
                             android:textSize="16sp"
+                            android:paddingVertical="8dp"
+                            android:focusable="false"
+                            android:inputType="none"
                             android:fontFamily="@font/poppins_regular"
-                            android:inputType="numberDecimal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -176,6 +196,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etBankName"
                             android:textSize="16sp"
+                            android:paddingVertical="8dp"
                             android:fontFamily="@font/poppins_regular"
                             android:inputType="textCapSentences"
                             android:layout_width="match_parent"
@@ -193,6 +214,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etNarration"
                         android:textSize="16sp"
+                        android:paddingVertical="8dp"
                         android:fontFamily="@font/poppins_regular"
                         android:inputType="textCapSentences"
                         android:layout_width="match_parent"
@@ -202,41 +224,51 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/llNonGST"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputLayout
+                <LinearLayout
                     android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Weight">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etWeight"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType="numberDecimal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Weight">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etWeight"
+                            android:paddingVertical="8dp"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:inputType="numberDecimal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Labour -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Purity">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPurity"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType="numberDecimal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    <!-- Labour -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Purity">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPurity"
+                            android:paddingVertical="8dp"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:inputType="numberDecimal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_marginTop="10dp"
@@ -247,7 +279,7 @@
                     android:textSize="16sp"
                     android:fontFamily="@font/poppins_regular"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="20dp"
+                    android:paddingVertical="8dp"
                     android:background="@drawable/et_bg"
                     android:id="@+id/tvFine"
                     android:text="0.00"
@@ -264,43 +296,62 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etNarrationNonGst"
                         android:textSize="16sp"
+                        android:paddingVertical="8dp"
                         android:fontFamily="@font/poppins_regular"
                         android:inputType="textCapSentences"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <!-- Balance Fine -->
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Balance Fine" />
+                        <TextView
+                            android:paddingVertical="8dp"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:paddingHorizontal="10dp"
+                            android:background="@drawable/et_bg"
+                            android:id="@+id/tvBalanceFine"
+                            android:text="0.00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
-                <!-- Total Fine -->
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Balance Fine" />
-                <TextView
-                    android:textSize="16sp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="18dp"
-                    android:background="@drawable/et_bg"
-                    android:id="@+id/tvBalanceFine"
-                    android:text="0.00"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <!-- Narration -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Round off Amount">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etRoundOffAmt"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:inputType="textCapSentences"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                    <!-- Narration -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:gravity="center"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:hint="Round off Amount">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etRoundOffAmt"
+                            android:textSize="16sp"
+                            android:paddingVertical="8dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:inputType="numberDecimal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -313,48 +364,73 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etReceivedAmt"
                     android:textSize="16sp"
+                    android:paddingVertical="8dp"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="numberDecimal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Total Fine -->
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total Amount" />
-            <TextView
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="18dp"
-                android:background="@drawable/et_bg"
-                android:id="@+id/tvTotalAmt"
-                android:text="0.00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Balance Amount"/>
-            <TextView
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="18dp"
-                android:background="@drawable/et_bg"
-                android:id="@+id/tvBalanceAmt"
-                android:text="0.00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <!-- Total Fine -->
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Amount" />
+                <TextView
+                    android:paddingVertical="8dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingHorizontal="10dp"
+                    android:background="@drawable/et_bg"
+                    android:id="@+id/tvTotalAmt"
+                    android:text="0.00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:fontFamily="@font/poppins_regular"
+                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Balance Amount"/>
+                <TextView
+
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    android:background="@drawable/et_bg"
+                    android:id="@+id/tvBalanceAmt"
+                    android:text="0.00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
 
 
             <!-- Submit -->
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:background="@drawable/button_bg"
@@ -368,6 +444,5 @@
                 android:backgroundTint="#333333"/>
 
         </LinearLayout>
-    </ScrollView>
-
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

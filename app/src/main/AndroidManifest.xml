@@ -4,13 +4,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
         tools:targetApi="31" >
@@ -85,9 +89,46 @@
         <activity
             android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
             android:name=".activity.StockListActivity"
+            android:exported="true"></activity>
+
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.SalesReportActivity"
             android:exported="true">
 
         </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.ExpenseReportActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.SalesListActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.ProductListingActivity"
+            android:exported="true">
+
+        </activity><activity
+            android:theme="@style/Theme.BhavarlalTrilokchandhiAndSonsPLtd"
+            android:name=".activity.EditInvoiceByPartActivity"
+            android:exported="true">
+
+        </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 </manifest>

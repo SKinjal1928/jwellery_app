@@ -98,6 +98,18 @@ public class ExpenseListResponse implements Serializable {
         @SerializedName("updated_at")
         @Expose
         private String updatedAt;
+        @SerializedName("date_dmy")
+        @Expose
+        private String date_dmy;
+        @SerializedName("lodging_comment")
+        @Expose
+        private String lodging_comment;
+        @SerializedName("travelling_comment")
+        @Expose
+        private String travelling_comment;
+        @SerializedName("other_comment")
+        @Expose
+        private String other_comment;
 
         public Integer getId() {
             return id;
@@ -187,5 +199,36 @@ public class ExpenseListResponse implements Serializable {
             this.updatedAt = updatedAt;
         }
 
+        public String getDate_dmy() {
+            return date_dmy;
+        }
+
+        public void setDate_dmy(String date_dmy) {
+            this.date_dmy = date_dmy;
+        }
+
+        public String getLodging_comment() {
+            return lodging_comment;
+        }
+
+        public void setLodging_comment(String lodging_comment) {
+            this.lodging_comment = lodging_comment;
+        }
+
+        public String getTravelling_comment() {
+            return travelling_comment;
+        }
+
+        public void setTravelling_comment(String travelling_comment) {
+            this.travelling_comment = travelling_comment;
+        }
+
+        public String getOther_comment() {
+            return other_comment;
+        }
+
+        public void setOther_comment(String other_comment) {
+            this.other_comment = other_comment;
+        }
     }
 }

@@ -7,16 +7,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import app.bhavarlal.trilokchandhi.sons.ltd.adapter.ExpenseAdapter;
 import app.bhavarlal.trilokchandhi.sons.ltd.common.NetworkUtils;
 import app.bhavarlal.trilokchandhi.sons.ltd.common.SharedPref;
 import app.bhavarlal.trilokchandhi.sons.ltd.databinding.ActivityDashboardBinding;
-import app.bhavarlal.trilokchandhi.sons.ltd.databinding.ActivityLoginBinding;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.DeliveryVoucherReq;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.DeliveryVoucherResponse;
-import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseListResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.retrofit.RetroInterface;
 import app.bhavarlal.trilokchandhi.sons.ltd.retrofit.RetrofitClient;
 import retrofit2.Call;
@@ -53,14 +49,47 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this, ExpenseListActivity.class));
             }
         });
+        binding.viewSalesList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                startActivity(new Intent(DashboardActivity.this, SalesListActivity.class));
+//                startActivity(new Intent(DashboardActivity.this, ProductInfoActivity.class));
 
+            }
+        }); binding.viewSales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, SalesReportActivity.class));
+
+            }
+        });
+
+        binding.viewExpenseHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, ExpenseReportActivity.class));
+            }
+        });
+        binding.imgLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPref.clearPreference(DashboardActivity.this);
+                Intent intent = new Intent(DashboardActivity    .this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        binding.txtCustomer.setText(SharedPref.getString("user", ""));
         if (NetworkUtils.isInternetAvailable(DashboardActivity.this)) {
             getDeliveryVoucher();
         } else {
             Toast.makeText(DashboardActivity.this, "Please check connection!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void getDeliveryVoucher() {
         DeliveryVoucherReq req =new DeliveryVoucherReq("1" , SharedPref.getString("user_id", ""));
@@ -75,6 +104,26 @@ public class DashboardActivity extends AppCompatActivity {
 
                 if (response.code() == 200) {
                     SharedPref.putString("delivery_id", response.body().getData().getId()+"");
+/*                    generateTravellingVoucher(response.body().getData().getSalesmanName(),
+                            response.body().getData().getFromLocation(),
+                            response.body().getData().getTotalNW(),
+                            response.body().getData().getTotalQuantity(),
+                            response.body().getData().getCash(),
+                            response.body().getData().getSalesmanAdhar()
+                            );*/
+                /*    try {
+                        createVoucherWithLetterhead(DashboardActivity.this,
+                                response.body().getData().getSalesmanName(),
+                                response.body().getData().getFromLocation(),
+                                response.body().getData().getToLocation(),
+                                response.body().getData().getTotalNW(),
+                                response.body().getData().getTotalQuantity()+"",
+                                response.body().getData().getCash(),
+                                response.body().getData().getSalesmanAdhar()
+                                );
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }*/
                 } else {
                     Toast.makeText(DashboardActivity.this, "Delivery voucher error..", Toast.LENGTH_SHORT).show();
                 }

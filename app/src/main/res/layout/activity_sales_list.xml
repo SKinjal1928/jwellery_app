@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:elevation="4dp">
+
+            <!-- Back Button -->
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:contentDescription="Back"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Title -->
+            <TextView
+                android:fontFamily="@font/poppins_semi_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sales Report"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333"/>
+        </LinearLayout>
+        <!-- Filter Buttons -->
+        <LinearLayout
+            android:id="@+id/filterLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"
+            android:weightSum="3">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAll"
+                android:fontFamily="@font/poppins_regular"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="All"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnToday"
+                android:fontFamily="@font/poppins_regular"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Today"
+                android:layout_marginStart="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDateRange"
+                android:fontFamily="@font/poppins_regular"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Date Range"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+        <!-- Date Range Selection -->
+        <LinearLayout
+            android:id="@+id/dateRangeLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="12dp"
+            android:weightSum="2">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvStartDate"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/border_rounded"
+                android:text="Start Date"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvEndDate"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:background="@drawable/border_rounded"
+                android:text="End Date"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/item_order"
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+    <!-- Bottom Loading Indicator -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"/>
+
+</RelativeLayout>

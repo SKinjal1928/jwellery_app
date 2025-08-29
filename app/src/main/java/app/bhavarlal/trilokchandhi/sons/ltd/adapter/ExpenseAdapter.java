@@ -46,7 +46,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ItemView
     public void onBindViewHolder(ExpenseAdapter.ItemViewHolder holder, int position) {
         ExpenseListResponse.Datum data = itemList.get(position);
         holder.txt_place.setText(data.getNamePlace()+"");
-        holder.txt_date.setText(data.getCreatedAt()+"");
+        holder.txt_date.setText(data.getDate_dmy()+"");
         holder.txt_lodge.setText(data.getLodging()+"");
         holder.txt_other.setText(data.getOther()+"");
         holder.txt_travel.setText(data.getTravelling()+"");

@@ -6,9 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +21,9 @@ import java.util.TimerTask;
 import app.bhavarlal.trilokchandhi.sons.ltd.common.NetworkUtils;
 import app.bhavarlal.trilokchandhi.sons.ltd.common.SharedPref;
 import app.bhavarlal.trilokchandhi.sons.ltd.databinding.ActivityInvoiceInfoBinding;
-import app.bhavarlal.trilokchandhi.sons.ltd.model.CustomerResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseListReq;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderGenerateReq;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderListResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.StockResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.retrofit.RetroInterface;
 import app.bhavarlal.trilokchandhi.sons.ltd.retrofit.RetrofitClient;
@@ -46,7 +44,10 @@ public class InvoiceDetailActivity extends AppCompatActivity {
     private boolean isItemSelectedManually = false;
     String product_id = "", rate_applied = "";
     ArrayList<OrderGenerateReq.Product> productEntryList = new ArrayList<>();
+    ArrayList<OrderListResponse.OrderProduct> productUpdateList = new ArrayList<>();
     Double l_amt_total = 0.0, fine_total = 0.0;
+    OrderListResponse.Datum datum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,43 +56,68 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         SharedPref.init(this);
         customerList = new ArrayList<>();
+        productUpdateList = new ArrayList<>();
         apiInterface = RetrofitClient.getRetrofitInstance().create(RetroInterface.class);
+        if (NetworkUtils.isInternetAvailable(InvoiceDetailActivity.this)) {
+            getProductItems();
+        } else {
+            Toast.makeText(InvoiceDetailActivity.this, "Please check connection!", Toast.LENGTH_SHORT).show();
+        }
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(validateInputs()) {
                     fine_total = fine_total + Double.parseDouble(binding.tvFine.getText().toString());
                     l_amt_total = l_amt_total + Double.parseDouble(binding.tvLAmount.getText().toString());
                     OrderGenerateReq.Product reqOrder = new OrderGenerateReq.Product();
 
                     reqOrder = new OrderGenerateReq.Product(product_id, binding.etPurity.getText().toString(),
-                            binding.etLess.getText().toString(), binding.etGW.getText().toString(),
-                            binding.etPcs.getText().toString(), binding.etWastage.getText().toString(),
-                            binding.tvFine.getText().toString(), binding.etLabourRate.getText().toString(),
+                            binding.etLess.getText().toString(),
+                            binding.etGW.getText().toString(),
+                            binding.etPcs.getText().toString(),
+                            binding.etWastage.getText().toString(),
+                            binding.tvFine.getText().toString(),
+                            binding.etLabourRate.getText().toString(),
                             rate_applied, binding.tvLAmount.getText().toString()
                     );
-                    productEntryList.add(reqOrder);
 
-                    Intent i = new Intent(InvoiceDetailActivity.this, FinalDetailsActivity.class);
-                    i.putExtra("date", getIntent().getStringExtra("date").toString());
-                    i.putExtra("customer", getIntent().getStringExtra("customer").toString());
-                    i.putExtra("customer_id", getIntent().getStringExtra("customer_id").toString());
-                    i.putExtra("address", getIntent().getStringExtra("address").toString());
+                    if(binding.btnNext.getText().toString().trim().equalsIgnoreCase("update")){
+                        productEntryList.set(getIntent().getIntExtra("position", 0), reqOrder);
 
-                    i.putParcelableArrayListExtra("products", productEntryList);
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("updated_product", productEntryList.get(getIntent().getIntExtra("position", 0)));
+                        resultIntent.putExtra("updated_product", productUpdateList.get(getIntent().getIntExtra("position", 0)));
+                        resultIntent.putExtra("position", getIntent().getIntExtra("position", -1));
+                        setResult(RESULT_OK, resultIntent);
+                        finish();
 
-                    i.putExtra("product_id", product_id + "");
-                    i.putExtra("quantity", binding.etPcs.getText().toString() + "");
-                    i.putExtra("gross_weight", binding.etGW.getText().toString() + "");
-                    i.putExtra("less_weight", binding.etLess.getText().toString() + "");
-                    i.putExtra("purity", binding.etPurity.getText().toString() + "");
-                    i.putExtra("wastage", binding.etWastage.getText().toString() + "");
-                    i.putExtra("laboure_rate", binding.etLabourRate.getText().toString() + "");
-                    i.putExtra("rate_on", rate_applied);
-                    i.putExtra("laboure_amount", l_amt_total + "");
-                    i.putExtra("fine", fine_total + "");
+                    }else {
+                        productEntryList.add(reqOrder);
 
-                    startActivity(i);
+                        Intent i = new Intent(InvoiceDetailActivity.this, FinalDetailsActivity.class);
+                        i.putExtra("date", getIntent().getStringExtra("date").toString());
+                        i.putExtra("customer", getIntent().getStringExtra("customer").toString());
+                        i.putExtra("customer_id", getIntent().getStringExtra("customer_id").toString());
+                        i.putExtra("address", getIntent().getStringExtra("address").toString());
+
+                        i.putParcelableArrayListExtra("products", productEntryList);
+
+                        i.putExtra("product_id", product_id + "");
+                        i.putExtra("quantity", binding.etPcs.getText().toString() + "");
+                        i.putExtra("gross_weight", binding.etGW.getText().toString() + "");
+                        i.putExtra("less_weight", binding.etLess.getText().toString() + "");
+                        i.putExtra("purity", binding.etPurity.getText().toString() + "");
+                        i.putExtra("wastage", binding.etWastage.getText().toString() + "");
+                        i.putExtra("laboure_rate", binding.etLabourRate.getText().toString() + "");
+                        i.putExtra("rate_on", rate_applied);
+                        i.putExtra("laboure_amount", l_amt_total + "");
+                        i.putExtra("fine", fine_total + "");
+
+                        startActivity(i);
+                    }
+
+
                 }
             }
         });
@@ -101,6 +127,71 @@ public class InvoiceDetailActivity extends AppCompatActivity {
 
         textWatcherForNetWeight();
         textWatcherForFine();
+        if ((OrderListResponse.Datum) getIntent().getSerializableExtra("order") != null) {
+            binding.btnNext.setText("Update");
+            datum = (OrderListResponse.Datum) getIntent().getSerializableExtra("order");
+            for(int i = 0; i< datum.getOrderProduct().size(); i++ ){
+                OrderGenerateReq.Product reqOrder = new OrderGenerateReq.Product();
+                OrderListResponse.OrderProduct reqOrder1 = new OrderListResponse.OrderProduct(
+                        datum.getOrderProduct().get(i).getId(),
+                        datum.getOrderProduct().get(i).getProductId(),
+                        Integer.parseInt(SharedPref.getString("user_id", "")),
+                        Integer.parseInt(SharedPref.getString("delivery_id", "")),
+                        datum.getOrderProduct().get(i).getOrderId(),
+                        datum.getOrderProduct().get(i).getQuantity(),
+                        datum.getOrderProduct().get(i).getGrossWeight(),
+                        datum.getOrderProduct().get(i).getLessWeight(),
+                        datum.getOrderProduct().get(i).getPurity(),
+                        datum.getOrderProduct().get(i).getWastage(),
+                        datum.getOrderProduct().get(i).getFine(),
+                        datum.getOrderProduct().get(i).getLaboureRate(),
+                        datum.getOrderProduct().get(i).getRateOn(),
+                        datum.getOrderProduct().get(i).getLaboureAmount(),
+                        new OrderListResponse.ProductDetails(datum.getOrderProduct().get(i).getProductDetails().getId(),
+                                datum.getOrderProduct().get(i).getProductDetails().getProductName() )
+
+                );
+
+                reqOrder = new OrderGenerateReq.Product(datum.getOrderProduct().get(i).getProductId()+"",
+                        datum.getOrderProduct().get(i).getPurity().toString(),
+                        datum.getOrderProduct().get(i).getLessWeight().toString(),
+                        datum.getOrderProduct().get(i).getGrossWeight().toString(),
+                        datum.getOrderProduct().get(i).getQuantity().toString(),
+                        datum.getOrderProduct().get(i).getWastage().toString(),
+                        datum.getOrderProduct().get(i).getFine().toString(),
+                        datum.getOrderProduct().get(i).getLaboureRate().toString(),
+                        datum.getOrderProduct().get(i).getRateOn().toString(),
+                        datum.getOrderProduct().get(i).getLaboureAmount().toString()
+                );
+                productEntryList.add(reqOrder);
+                productUpdateList.add(reqOrder1);
+            }
+
+            binding.etPcs.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getQuantity()+"");
+            binding.etLess.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getLessWeight()+"");
+            binding.etPurity.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getPurity()+"");
+            binding.etGW.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getGrossWeight()+"");
+            binding.etWastage.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getWastage()+"");
+            binding.tvFine.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getFine()+"");
+            binding.etLabourRate.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getLaboureRate()+"");
+            binding.tvLAmount.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getLaboureAmount()+"");
+
+
+            binding.searchRateApplied.setText(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getRateOn()+"");
+
+            /*binding.searchAutoComplete.setText(datum.getCustomer().getName());
+            binding.txtAddress.setText(datum.getCustomer().getAddress());
+            binding.txtPhone.setText(datum.getCustomer().getContact());*/
+        }
+    }
+
+    public String getProductNameById(int productId, List<StockResponse.Datum> productList) {
+        for (StockResponse.Datum product : productList) {
+            if (product.getId() == productId) {
+                return product.getProductName();
+            }
+        }
+        return ""; // default if not found
     }
 
     private void textWatcherForFine() {
@@ -196,6 +287,16 @@ public class InvoiceDetailActivity extends AppCompatActivity {
                             binding.tvFine.getText().toString(), binding.etLabourRate.getText().toString(),
                             rate_applied, binding.tvLAmount.getText().toString()
                             );
+
+/*                    new OrderGenerateReq.Product(product_id, binding.etPurity.getText().toString(),
+                            Double.parseDouble(binding.etLess.getText().toString()),
+                            Double.parseDouble(binding.etGW.getText().toString()),
+                            Integer.parseInt(binding.etPcs.getText().toString()),
+                            Double.parseDouble(binding.etWastage.getText().toString()),
+                            Double.parseDouble(binding.tvFine.getText().toString()),
+                            Double.parseDouble(binding.etLabourRate.getText().toString()),
+                            rate_applied, Double.parseDouble(binding.tvLAmount.getText().toString())
+                    );*/
                     productEntryList.add(reqOrder);
 
                     Toast.makeText(InvoiceDetailActivity.this, "Product added", Toast.LENGTH_SHORT).show();
@@ -206,6 +307,7 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         });
 
     }
+
     private void clearInputs() {
         binding.searchItem.setText("");
         binding.etPcs.setText("");
@@ -221,6 +323,7 @@ public class InvoiceDetailActivity extends AppCompatActivity {
 //        product_id = "";
 //        rate_applied = "";
     }
+
     private boolean validateInputs() {
 
         boolean isValid = true;
@@ -255,10 +358,10 @@ public class InvoiceDetailActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        if (binding.etLabourRate.getText().toString().trim().isEmpty()) {
+        /*if (binding.etLabourRate.getText().toString().trim().isEmpty()) {
             binding.etLabourRate.setError("Enter labour rate");
             isValid = false;
-        }
+        }*/
 
         if (binding.searchRateApplied.getText().toString().trim().isEmpty()) {
             binding.searchRateApplied.setError("Select rate applied");
@@ -270,7 +373,6 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         return isValid;
 
     }
-
 
     private void searchRateAppliedListener() {
         binding.searchRateApplied.setOnClickListener(v -> binding.searchRateApplied.showDropDown());
@@ -337,18 +439,21 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         binding.searchRateApplied.setOnItemClickListener((parent, view, position, id) -> {
             isItemSelectedManually = true; // Prevent dropdown from reappearing
             String selectedProduct = rateAppliedAdapter.getItem(position);
-            Toast.makeText(InvoiceDetailActivity.this, "Rate on: " +
-                    selectedProduct, Toast.LENGTH_SHORT).show();
+        /*    Toast.makeText(InvoiceDetailActivity.this, "Rate on: " +
+                    selectedProduct, Toast.LENGTH_SHORT).show();*/
             rate_applied = selectedProduct;
             binding.searchItem.dismissDropDown();
             binding.searchItem.clearFocus();
-            binding.tvLAmount.setText(calculateLabourAmount(Double.parseDouble(binding.etLabourRate.getText().toString()),
+
+            binding.tvLAmount.setText(String.format(Locale.getDefault(), "%.2f", calculateLabourAmount(
+                    binding.etLabourRate.getText().toString().equals("") || binding.etLabourRate.getText().toString().isEmpty()
+                            ? 0.0 : Double.parseDouble(binding.etLabourRate.getText().toString()),
                     Integer.parseInt(binding.etPcs.getText().toString()),
                     Double.parseDouble(binding.etGW.getText().toString()),
                     Double.parseDouble(binding.etLess.getText().toString()),
                     Double.parseDouble(binding.tvNW.getText().toString()),
                     Double.parseDouble(binding.tvFine.getText().toString()),
-                    rate_applied)+"");
+                    rate_applied))+"");
         });
     }
 
@@ -359,8 +464,6 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         binding.searchItem.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 v.postDelayed(() -> binding.searchItem.showDropDown(), 100);
-            }else {
-                binding.searchItem.dismissDropDown();
             }
         });
 
@@ -417,17 +520,11 @@ public class InvoiceDetailActivity extends AppCompatActivity {
             isItemSelectedManually = true; // Prevent dropdown from reappearing
 
             StockResponse.Datum selectedProduct = adapter.getItem(position);
-            Toast.makeText(InvoiceDetailActivity.this, "Item selected: " +
-                    selectedProduct.getProductName(), Toast.LENGTH_SHORT).show();
-            product_id = selectedProduct.getId()+"";
+            product_id = selectedProduct.getProduct_id()+"";
             binding.searchItem.dismissDropDown();
             binding.searchItem.clearFocus();
         });
-        if (NetworkUtils.isInternetAvailable(InvoiceDetailActivity.this)) {
-            getProductItems();
-        } else {
-            Toast.makeText(InvoiceDetailActivity.this, "Please check connection!", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     private List<StockResponse.Datum> getFilteredItems(String query) {
@@ -439,6 +536,7 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         }
         return filteredUsers;
     }
+
     private List<String> getFilteredProduct(String query) {
         List<String> filteredUsers = new ArrayList<>();
         for (String product : rateAppliedList) {
@@ -448,6 +546,7 @@ public class InvoiceDetailActivity extends AppCompatActivity {
         }
         return filteredUsers;
     }
+
     private void getProductItems() {
         ExpenseListReq req = new ExpenseListReq( SharedPref.getString("delivery_id", ""),
                 SharedPref.getString("user_id", ""));
@@ -469,6 +568,11 @@ public class InvoiceDetailActivity extends AppCompatActivity {
                     binding.searchItem.setAdapter(adapter);*/
                     adapter.notifyDataSetChanged();
 
+                    if ((OrderListResponse.Datum) getIntent().getSerializableExtra("order") != null){
+                        String productName = getProductNameById(datum.getOrderProduct().get(getIntent().getIntExtra("position", 0)).getProductId(), customerList);
+                        binding.searchItem.setText(productName);
+                    }
+
                 } else {
                     Toast.makeText(InvoiceDetailActivity.this, "Customer retrieve error..", Toast.LENGTH_SHORT).show();
                 }
@@ -482,6 +586,7 @@ public class InvoiceDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     public double calculateLabourAmount(double labourRate, int pcs, double gw, double less,
                                         double nw, double fine, String rateOn) {
         switch (rateOn.toUpperCase()) {

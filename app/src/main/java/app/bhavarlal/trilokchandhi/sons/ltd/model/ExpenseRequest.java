@@ -29,15 +29,49 @@ public class ExpenseRequest {
         String food;
         @SerializedName("other")
         String other;
+        @SerializedName("lodging_comment")
+        String lodging_comment;
+        @SerializedName("travelling_comment")
+        String travelling_comment ;
+        @SerializedName("other_comment")
+        String other_comment  ;
 
-        // constructor, getters, setters
+        public String getLodging_comment() {
+            return lodging_comment;
+        }
 
-        public ExpenseItem(String namePlace, String date, String lodging, String travelling, String food, String other) {
+        public void setLodging_comment(String lodging_comment) {
+            this.lodging_comment = lodging_comment;
+        }
+
+        public String getTravelling_comment() {
+            return travelling_comment;
+        }
+
+        public void setTravelling_comment(String travelling_comment) {
+            this.travelling_comment = travelling_comment;
+        }
+
+        public String getOther_comment() {
+            return other_comment;
+        }
+
+        public void setOther_comment(String other_comment) {
+            this.other_comment = other_comment;
+        }
+// constructor, getters, setters
+
+        public ExpenseItem(String namePlace, String date, String lodging, String travelling,
+                           String food, String other, String lodge_comment, String travel_comment,
+                           String other_comment) {
             this.namePlace = namePlace;
             this.date = date;
             this.lodging = lodging;
             this.travelling = travelling;
             this.food = food;
+            this.lodging_comment = lodge_comment;
+            this.travelling_comment = travel_comment;
+            this.other_comment= other_comment;
             this.other = other;
         }
 

@@ -2,6 +2,7 @@ package app.bhavarlal.trilokchandhi.sons.ltd.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +57,12 @@ public class StockListActivity extends AppCompatActivity {
         } else {
             Toast.makeText(StockListActivity.this, "Please check connection!", Toast.LENGTH_SHORT).show();
         }
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
     private void getProductItems() {
         ExpenseListReq req = new ExpenseListReq( SharedPref.getString("delivery_id", ""),
@@ -73,6 +82,16 @@ public class StockListActivity extends AppCompatActivity {
                     stockList.addAll(response.body().getData());
                     binding.recyclerView.setAdapter(stockAdapter);
                     stockAdapter.notifyDataSetChanged();
+
+                    // Sort alphabetically by name
+                    Collections.sort(stockList, new Comparator<StockResponse.Datum>() {
+                        @Override
+                        public int compare(StockResponse.Datum b1, StockResponse.Datum b2) {
+                            return b1.getProductName().compareToIgnoreCase(b2.getProductName());
+                        }
+                    });
+                    stockAdapter.setStockList(stockList);
+
 
                 } else {
                     Toast.makeText(StockListActivity.this, "Stock retrieve error..", Toast.LENGTH_SHORT).show();

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import app.bhavarlal.trilokchandhi.sons.ltd.R;
@@ -47,13 +48,20 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ItemViewHold
         holder.txt_p_name.setText(data.getProductName()+"");
         holder.txt_quantity.setText(data.getFinalQuantity()+"");
         holder.txt_purity.setText(data.getPurity()+"");
-        holder.txt_g_wt.setText(data.getFinalGrossWeight()+"");
-        holder.txt_less_wt.setText(data.getFinalLessWeight()+"");
+        holder.txt_g_wt.setText(new DecimalFormat("0.000").format(data.getFinalGrossWeight())+"");
+        holder.txt_less_wt.setText(new DecimalFormat("0.000").format(data.getFinalLessWeight())+"");
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onItemClick(position);
         });
 
     }
+
+
+    public void setStockList(List<StockResponse.Datum> stockList) {
+        this.itemList = stockList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {

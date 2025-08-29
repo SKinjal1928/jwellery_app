@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit;
 //    private static String BASE_URL = "https://erp.oltymes.com/api/";
-    private static String BASE_URL = "https://jewellerybackend-j98i.onrender.com";
+    private static String BASE_URL = "https://api.btspl.in";
     public static Retrofit getRetrofitInstance() {
 //        TokenInterceptor interceptor=new TokenInterceptor();
 //

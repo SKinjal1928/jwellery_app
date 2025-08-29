@@ -1,36 +1,313 @@
 package app.bhavarlal.trilokchandhi.sons.ltd.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class OrderUpdateReq {
+public class OrderUpdateReq implements Serializable {
+    public String user_id = "";
+    public String delivery_id = "";
+    public String customer_id = "";
+    public String order_date = "";
+    public double old_fine = 0.0;
+    public double old_amount = 0.0;
+    public String old_bill_no = "";
+    public double metal_r_weight = 0.0;
+    public double metal_r_purity = 0.0;
+    public double metal_r_fine = 0.0;
+    public double balance_fine = 0.0;
+    public double amount = 0;
+    public double gst_percentage = 0;
+    public double received_amount = 0;
+    public double round_off_amount = 0.0;
+    public double balance_amount = 0;
+    public String cheque_no = "";
+    public String cheque_date = "";
+    public String cheque_bank_name = "";
+    public String comment_1 = "";
+    public String comment_2 = "";
+    public double other_purity = 0.0;
+    public String mode_of_payment = "";
+    public double gold_rate = 0;
+    public double total_amount = 0;
+    public String payment_type = "";
+    public List<Product> product;
+    public Integer id;
+    public  OrderUpdateReq(Integer id, String user_id, String delivery_id, String customer_id, String order_date,
+                             double old_fine, double old_amount, String old_bill_no,
+                             double metal_r_weight, double metal_r_purity, double metal_r_fine,
+                             double balance_fine, double amount, double gst_percentage,
+                             double received_amount, double round_off_amount, double balance_amount,
+                             String cheque_no, String cheque_date, String cheque_bank_name,
+                             String comment_1, String comment_2, double other_purity, String mode_of_payment,
+                             double gold_rate, double total_amount, String payment_type,
+                             List<Product> product) {
 
-        public String user_id = "5";
+        this.user_id = user_id;
+        this.delivery_id = delivery_id;
+        this.customer_id = customer_id;
+        this.order_date = order_date;
+        this.old_fine = old_fine;
+        this.old_amount = old_amount;
+        this.old_bill_no = old_bill_no;
+        this.metal_r_weight = metal_r_weight;
+        this.metal_r_purity = metal_r_purity;
+        this.metal_r_fine = metal_r_fine;
+        this.balance_fine = balance_fine;
+        this.amount = amount;
+        this.gst_percentage = gst_percentage;
+        this.received_amount = received_amount;
+        this.round_off_amount = round_off_amount;
+        this.balance_amount = balance_amount;
+        this.cheque_no = cheque_no;
+        this.cheque_date = cheque_date;
+        this.cheque_bank_name = cheque_bank_name;
+        this.comment_1 = comment_1;
+        this.comment_2 = comment_2;
+        this.other_purity = other_purity;
+        this.mode_of_payment = mode_of_payment;
+        this.gold_rate = gold_rate;
+        this.total_amount = total_amount;
+        this.payment_type = payment_type;
+        this.product = product;
+        this.id = id;
+
+    }
+
+    public  OrderUpdateReq(String user_id, String delivery_id, String customer_id, String order_date,
+                             double old_fine, double old_amount, String old_bill_no,
+                             double metal_r_weight, double metal_r_purity, double metal_r_fine,
+                             double balance_fine, double amount, double gst_percentage,
+                             double received_amount, double round_off_amount, double balance_amount,
+                             String cheque_no, String cheque_bank_name,
+                             String comment_1, String comment_2, double other_purity, String mode_of_payment,
+                             double gold_rate, double total_amount, String payment_type,
+                             List<Product> product) {
+        this.user_id = user_id;
+        this.delivery_id = delivery_id;
+        this.customer_id = customer_id;
+        this.order_date = order_date;
+        this.old_fine = old_fine;
+        this.old_amount = old_amount;
+        this.old_bill_no = old_bill_no;
+        this.metal_r_weight = metal_r_weight;
+        this.metal_r_purity = metal_r_purity;
+        this.metal_r_fine = metal_r_fine;
+        this.balance_fine = balance_fine;
+        this.amount = amount;
+        this.gst_percentage = gst_percentage;
+        this.received_amount = received_amount;
+        this.round_off_amount = round_off_amount;
+        this.balance_amount = balance_amount;
+        this.cheque_no = cheque_no;
+        this.cheque_bank_name = cheque_bank_name;
+        this.comment_1 = comment_1;
+        this.comment_2 = comment_2;
+        this.other_purity = other_purity;
+        this.mode_of_payment = mode_of_payment;
+        this.gold_rate = gold_rate;
+        this.total_amount = total_amount;
+        this.payment_type = payment_type;
+        this.product = product;
+    }
+
+    public static class Product implements Parcelable {
         public String id = "";
-        public String delivery_id = "1";
-        public String customer_id = "1";
-        public String order_date = "02-05-2025";
-        public double old_fine = 10.5;
-        public double old_amount = 5000;
-        public String old_bill_no = "OLD123";
-        public double metal_r_weight = 20.0;
-        public double metal_r_purity = 91.6;
-        public double metal_r_fine = 18.32;
-        public double balance_fine = 1.68;
-        public double amount = 6000;
-        public double gst_percentage = 3;
-        public double received_amount = 5000;
-        public double round_off_amount = 0.5;
-        public double balance_amount = 1000;
-        public String cheque_no = "123456";
-        public String cheque_date = "2025-05-01";
-        public String cheque_bank_name = "ABC Bank";
-        public String comment_1 = "First comment";
-        public String comment_2 = "Second comment";
-        public double other_purity = 75.0;
-        public String mode_of_payment = "GST";
-        public double gold_rate = 6500;
-        public double total_amount = 6100;
-        public List<Product> product;
+        public String purity = "";
+        public String less_weight = "";
+        public String gross_weight = "";
+        public String quantity ="";
+        public String wastage = "";
+        public String fine = "";
+        public String laboure_rate = "";
+        public String rate_on = "";
+        public String laboure_amount = "";
+
+        public Product() {
+        }
+
+        public Product(String id, String purity, String less_weight, String gross_weight,
+                       String quantity, String wastage, String fine, String laboure_rate,
+                       String rate_on, String laboure_amount) {
+            this.id = id;
+            this.purity = purity;
+            this.less_weight = less_weight;
+            this.gross_weight = gross_weight;
+            this.quantity = quantity;
+            this.wastage = wastage;
+            this.fine = fine;
+            this.laboure_rate = laboure_rate;
+            this.rate_on = rate_on;
+            this.laboure_amount = laboure_amount;
+        }
+
+        protected Product(Parcel in) {
+            id = in.readString();
+            purity = in.readString();
+            less_weight = in.readString();
+            gross_weight = in.readString();
+            quantity = in.readString();
+            wastage = in.readString();
+            fine = in.readString();
+            laboure_rate = in.readString();
+            rate_on = in.readString();
+            laboure_amount = in.readString();
+        }
+
+        public static final Creator<Product> CREATOR = new Creator<Product>() {
+            @Override
+            public Product createFromParcel(Parcel in) {
+                return new Product(in);
+            }
+
+            @Override
+            public Product[] newArray(int size) {
+                return new Product[size];
+            }
+        };
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(id);
+            dest.writeString(purity);
+            dest.writeString(less_weight);
+            dest.writeString(gross_weight);
+            dest.writeString(quantity);
+            dest.writeString(wastage);
+            dest.writeString(fine);
+            dest.writeString(laboure_rate);
+            dest.writeString(rate_on);
+            dest.writeString(laboure_amount);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+    }
+/*    public String user_id;
+    public String delivery_id;
+    public String customer_id;
+    public String order_date;
+    public double old_fine;
+    public double old_amount;
+    public String old_bill_no;
+    public double metal_r_weight;
+    public double metal_r_purity;
+    public double metal_r_fine;
+    public double balance_fine;
+    public double amount;
+    public double gst_percentage;
+    public double received_amount;
+    public double round_off_amount;
+    public double balance_amount;
+    public String cheque_no;
+    public String cheque_date;
+    public String cheque_bank_name;
+    public String comment_1;
+    public String comment_2;
+    public double other_purity;
+    public String mode_of_payment;
+    public double gold_rate;
+    public double total_amount;
+    public double received_amount_duplicate; // To prevent clash
+    public double balance_amount_duplicate;  // To prevent clash
+    public List<Product> product;
+
+    public static class Product {
+        public String product_id;
+        public double purity;
+        public double less_weight;
+        public double gross_weight;
+        public int quantity;
+        public double wastage;
+        public double fine;
+        public double laboure_rate;
+        public String rate_on;
+        public double laboure_amount;
+
+        public String getProduct_id() {
+            return product_id;
+        }
+
+        public void setProduct_id(String product_id) {
+            this.product_id = product_id;
+        }
+
+        public double getPurity() {
+            return purity;
+        }
+
+        public void setPurity(double purity) {
+            this.purity = purity;
+        }
+
+        public double getLess_weight() {
+            return less_weight;
+        }
+
+        public void setLess_weight(double less_weight) {
+            this.less_weight = less_weight;
+        }
+
+        public double getGross_weight() {
+            return gross_weight;
+        }
+
+        public void setGross_weight(double gross_weight) {
+            this.gross_weight = gross_weight;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public double getWastage() {
+            return wastage;
+        }
+
+        public void setWastage(double wastage) {
+            this.wastage = wastage;
+        }
+
+        public double getFine() {
+            return fine;
+        }
+
+        public void setFine(double fine) {
+            this.fine = fine;
+        }
+
+        public double getLaboure_rate() {
+            return laboure_rate;
+        }
+
+        public void setLaboure_rate(double laboure_rate) {
+            this.laboure_rate = laboure_rate;
+        }
+
+        public String getRate_on() {
+            return rate_on;
+        }
+
+        public void setRate_on(String rate_on) {
+            this.rate_on = rate_on;
+        }
+
+        public double getLaboure_amount() {
+            return laboure_amount;
+        }
+
+        public void setLaboure_amount(double laboure_amount) {
+            this.laboure_amount = laboure_amount;
+        }
+    }
 
     public String getUser_id() {
         return user_id;
@@ -38,14 +315,6 @@ public class OrderUpdateReq {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getDelivery_id() {
@@ -240,158 +509,27 @@ public class OrderUpdateReq {
         this.total_amount = total_amount;
     }
 
+    public double getReceived_amount_duplicate() {
+        return received_amount_duplicate;
+    }
+
+    public void setReceived_amount_duplicate(double received_amount_duplicate) {
+        this.received_amount_duplicate = received_amount_duplicate;
+    }
+
+    public double getBalance_amount_duplicate() {
+        return balance_amount_duplicate;
+    }
+
+    public void setBalance_amount_duplicate(double balance_amount_duplicate) {
+        this.balance_amount_duplicate = balance_amount_duplicate;
+    }
+
     public List<Product> getProduct() {
         return product;
     }
 
     public void setProduct(List<Product> product) {
         this.product = product;
-    }
-
-    public OrderUpdateReq(String user_id, String id, String delivery_id, String customer_id,
-                          String order_date, double old_fine, double old_amount, String old_bill_no,
-                          double metal_r_weight, double metal_r_purity, double metal_r_fine,
-                          double balance_fine, double amount, double gst_percentage,
-                          double received_amount, double round_off_amount, double balance_amount,
-                          String cheque_no, String cheque_date, String cheque_bank_name,
-                          String comment_1, String comment_2, double other_purity,
-                          String mode_of_payment, double gold_rate, double total_amount,
-                          List<Product> product) {
-        this.user_id = user_id;
-        this.id = id;
-        this.delivery_id = delivery_id;
-        this.customer_id = customer_id;
-        this.order_date = order_date;
-        this.old_fine = old_fine;
-        this.old_amount = old_amount;
-        this.old_bill_no = old_bill_no;
-        this.metal_r_weight = metal_r_weight;
-        this.metal_r_purity = metal_r_purity;
-        this.metal_r_fine = metal_r_fine;
-        this.balance_fine = balance_fine;
-        this.amount = amount;
-        this.gst_percentage = gst_percentage;
-        this.received_amount = received_amount;
-        this.round_off_amount = round_off_amount;
-        this.balance_amount = balance_amount;
-        this.cheque_no = cheque_no;
-        this.cheque_date = cheque_date;
-        this.cheque_bank_name = cheque_bank_name;
-        this.comment_1 = comment_1;
-        this.comment_2 = comment_2;
-        this.other_purity = other_purity;
-        this.mode_of_payment = mode_of_payment;
-        this.gold_rate = gold_rate;
-        this.total_amount = total_amount;
-        this.product = product;
-    }
-
-    public static class Product {
-            public String id = "1";
-            public double purity = 91.6;
-            public double less_weight = 0.5;
-            public double gross_weight = 10.0;
-            public int quantity = 1;
-            public double wastage = 2.0;
-            public double fine = 9.2;
-            public double laboure_rate = 100;
-            public String rate_on = "per gram";
-            public double laboure_amount = 1000;
-
-        public Product(String id, double purity, double less_weight, double gross_weight, int quantity,
-                       double wastage, double fine, double laboure_rate, String rate_on,
-                       double laboure_amount) {
-            this.id = id;
-            this.purity = purity;
-            this.less_weight = less_weight;
-            this.gross_weight = gross_weight;
-            this.quantity = quantity;
-            this.wastage = wastage;
-            this.fine = fine;
-            this.laboure_rate = laboure_rate;
-            this.rate_on = rate_on;
-            this.laboure_amount = laboure_amount;
-        }
-
-        public double getLaboure_amount() {
-            return laboure_amount;
-        }
-
-        public void setLaboure_amount(double laboure_amount) {
-            this.laboure_amount = laboure_amount;
-        }
-
-        public String getRate_on() {
-            return rate_on;
-        }
-
-        public void setRate_on(String rate_on) {
-            this.rate_on = rate_on;
-        }
-
-        public double getLaboure_rate() {
-            return laboure_rate;
-        }
-
-        public void setLaboure_rate(double laboure_rate) {
-            this.laboure_rate = laboure_rate;
-        }
-
-        public double getFine() {
-            return fine;
-        }
-
-        public void setFine(double fine) {
-            this.fine = fine;
-        }
-
-        public double getWastage() {
-            return wastage;
-        }
-
-        public void setWastage(double wastage) {
-            this.wastage = wastage;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-
-        public double getGross_weight() {
-            return gross_weight;
-        }
-
-        public void setGross_weight(double gross_weight) {
-            this.gross_weight = gross_weight;
-        }
-
-        public double getLess_weight() {
-            return less_weight;
-        }
-
-        public void setLess_weight(double less_weight) {
-            this.less_weight = less_weight;
-        }
-
-        public double getPurity() {
-            return purity;
-        }
-
-        public void setPurity(double purity) {
-            this.purity = purity;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-    }
-
+    }*/
 }

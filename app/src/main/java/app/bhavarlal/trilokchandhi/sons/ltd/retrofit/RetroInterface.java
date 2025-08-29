@@ -5,11 +5,19 @@ import app.bhavarlal.trilokchandhi.sons.ltd.model.DeliveryVoucherReq;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseListReq;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.DeliveryVoucherResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseListResponse;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpensePaginateReq;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpensePaginateResponse;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseReport;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseRequest;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseUpdateReq;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.ExpenseUpdateResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.LoginResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderGenerateReq;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderListPaginateResponse;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderListResponse;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderPaginateReq;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderPdfReq;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderPdfResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderUpdateReq;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.ProductResponse;
 import app.bhavarlal.trilokchandhi.sons.ltd.model.StockResponse;
@@ -80,13 +88,27 @@ public interface RetroInterface {
                                    @Body OrderUpdateReq request);
 
     @POST("/order/list")
-    Call<ExpenseListResponse> getOrderList(@Header("Authorization") String token,
-                                           @Body ExpenseListReq request);
+    Call<OrderListResponse> getOrderList(@Header("Authorization") String token,
+                                         @Body ExpenseListReq request);
 
-    @FormUrlEncoded
-    @POST("/order/Order-pdf")
-    Call<ResponseBody> orderSalesReport(@Header("Authorization") String token,
-                                        @Body ExpenseListReq request);
+    @POST("/order/paginate")
+    Call<OrderListPaginateResponse> getOrderPaginateList(@Header("Authorization") String token,
+                                                         @Body OrderPaginateReq request);
+
+
+    @POST("/order/order-pdf-data")
+    Call<OrderPdfResponse> orderPdfReport(@Header("Authorization") String token,
+                                          @Body OrderPdfReq request);
+
+
+
+    @POST("/expense/paginate")
+    Call<ExpensePaginateResponse> getExpensePaginateList(@Header("Authorization") String token,
+                                                         @Body ExpensePaginateReq request);
+
+    @POST("/expense/expense-pdf-data")
+    Call<ExpenseReport> expenseReportPdf(@Header("Authorization") String token,
+                                         @Body ExpenseListReq request);
 
     @POST("/order/Get-One")
     Call<ExpenseListResponse> getOrderById(@Header("Authorization") String token,

@@ -15,16 +15,6 @@
         android:gravity="center_vertical"
         android:elevation="4dp">
 
-        <!-- Back Button -->
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_back"
-            android:contentDescription="Back"
-            android:layout_marginEnd="16dp" />
-
         <!-- Title -->
         <TextView
             android:fontFamily="@font/poppins_semi_bold"
@@ -34,6 +24,17 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#333333"/>
+
+        <!-- Back Button -->
+        <ImageView
+            android:rotation="180"
+            android:layout_gravity="center"
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="Back"
+            android:layout_marginEnd="16dp" />
     </LinearLayout>
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,6 +58,7 @@
             android:layout_height="wrap_content">
             <!-- Fine -->
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +67,7 @@
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="20dp"
+                android:paddingVertical="8dp"
                 android:background="@drawable/et_bg"
                 android:id="@+id/tvFine"
                 android:text="0.00"
@@ -79,6 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <TextView
+
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,7 +89,7 @@
                 <Spinner
                     android:background="@drawable/et_bg"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="20dp"
+                    android:paddingVertical="10dp"
                     android:id="@+id/spinnerStandard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,6 +119,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etOldFine"
                     android:textSize="16sp"
+                    android:paddingVertical="8dp"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="numberDecimal"
                     android:layout_width="match_parent"
@@ -124,15 +128,16 @@
 
             <!-- Total Fine -->
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total Fine" />
             <TextView
+                android:paddingVertical="8dp"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingHorizontal="10dp"
-                android:paddingVertical="18dp"
                 android:background="@drawable/et_bg"
                 android:id="@+id/tvTotalFine"
                 android:text="0.00"
@@ -140,7 +145,24 @@
                 android:layout_height="wrap_content"/>
 
             <!-- Labour -->
-            <com.google.android.material.textfield.TextInputLayout
+            <!-- Total Fine -->
+            <TextView
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Labour" />
+            <TextView
+                android:paddingVertical="8dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/et_bg"
+                android:id="@+id/etLabour"
+                android:text="0.00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <!--<com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,13 +170,14 @@
                 android:hint="Labour">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLabour"
+                    android:paddingVertical="8dp"
                     android:textSize="16sp"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="numberDecimal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
-
+-->
             <!-- Old Amount -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
@@ -165,6 +188,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etOldAmount"
                     android:textSize="16sp"
+                    android:paddingVertical="8dp"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="numberDecimal"
                     android:layout_width="match_parent"
@@ -180,6 +204,7 @@
                 android:hint="Narration">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNarration"
+                    android:paddingVertical="8dp"
                     android:textSize="16sp"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="textCapSentences"
@@ -188,20 +213,25 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select Payment mode"/>
             <AutoCompleteTextView
+                android:focusable="false"
+                android:inputType="none"
                 android:textSize="16sp"
                 android:fontFamily="@font/poppins_regular"
                 android:background="@drawable/et_bg"
-                android:padding="15dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="8dp"
                 android:id="@+id/search_payment_mode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Payment mode"
-                android:inputType="text" />
+                 />
+
 
 
             <!-- Submit -->

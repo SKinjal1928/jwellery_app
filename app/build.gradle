@@ -30,6 +30,13 @@ android {
         viewBinding true
         compose true
     }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src\\main\\assets'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -42,4 +49,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.itextpdf:itext7-core:7.2.5'
+//    implementation 'com.itextpdf:itextg:5.5.13.2'
+    implementation 'com.itextpdf:html2pdf:4.0.4'     // HTML to PDF support
+
 }

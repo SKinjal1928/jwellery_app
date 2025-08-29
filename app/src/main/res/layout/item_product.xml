@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="4dp">
+
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:id="@+id/txtProductName"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="Gold Ring"
+        android:textColor="#000000" />
+
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:id="@+id/txtQuantity"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Qty: 2" />
+
+    <TextView
+        android:fontFamily="@font/poppins_regular"
+        android:id="@+id/txtTotal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="₹10000"
+        android:textStyle="bold"
+        android:textColor="#1A237E" />
+
+</LinearLayout>

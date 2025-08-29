@@ -76,6 +76,12 @@ public class ExpenseListActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
 }

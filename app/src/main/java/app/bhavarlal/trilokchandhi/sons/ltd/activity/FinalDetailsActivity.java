@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +22,17 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import app.bhavarlal.trilokchandhi.sons.ltd.databinding.ActivityFinalDetailsBinding;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderHolder;
+import app.bhavarlal.trilokchandhi.sons.ltd.model.OrderListResponse;
 
 public class FinalDetailsActivity extends AppCompatActivity {
     ActivityFinalDetailsBinding binding;
     String[] rateAppliedList = {"GST","NON-GST"};
     double selectedStandard = 100.0; // default
     ArrayAdapter<String> rateAppliedAdapter;
+    String selectedPayment = "";
+    OrderListResponse.Datum order;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,35 +42,65 @@ public class FinalDetailsActivity extends AppCompatActivity {
 
         binding.tvFine.setText(getIntent().getStringExtra("fine").toString());
         binding.etLabour.setText(getIntent().getStringExtra("laboure_amount").toString());
+        order = OrderHolder.getOrder();
+        if(order != null){
+            binding.backButton.setVisibility(View.GONE);
+            binding.etOldFine.setText(order.getOldFine());
+            binding.etOldAmount.setText(order.getOldAmount());
+            selectedPayment = order.getModeOfPayment();
+            binding.searchPaymentMode.setText(selectedPayment);
+            binding.etNarration.setText(order.getComment1());
+            setSpinnerValue(binding.spinnerStandard, order.getOtherPurity());
+        }
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(FinalDetailsActivity.this, PaymentDetailsActivity.class);
-                i.putExtra("date", getIntent().getStringExtra("date").toString());
-                i.putExtra("customer", getIntent().getStringExtra("customer").toString());
-                i.putExtra("address", getIntent().getStringExtra("address").toString());
-                i.putExtra("customer_id", getIntent().getStringExtra("customer_id").toString());
-                i.putParcelableArrayListExtra("products", getIntent().getParcelableArrayListExtra("products"));
 
-                i.putExtra("product_id", getIntent().getStringExtra("product_id").toString());
-                i.putExtra("quantity", getIntent().getStringExtra("quantity").toString());
-                i.putExtra("gross_weight", getIntent().getStringExtra("gross_weight").toString());
-                i.putExtra("less_weight", getIntent().getStringExtra("less_weight").toString());
-                i.putExtra("purity", getIntent().getStringExtra("purity").toString());
-                i.putExtra("wastage", getIntent().getStringExtra("wastage").toString());
-                i.putExtra("laboure_rate", getIntent().getStringExtra("laboure_rate").toString());
-                i.putExtra("rate_on", getIntent().getStringExtra("rate_on").toString());
-                i.putExtra("laboure_amount", getIntent().getStringExtra("laboure_amount").toString());
+                if(order != null){
+//                    order.setOldFine(binding.etOldFine.getText().toString());
+                    order.setOldFine(binding.etOldFine.getText().toString());
+                    order.setBalanceFine(Double.parseDouble(binding.tvTotalFine.getText().toString()+""));
+                    order.setOldAmount(binding.etOldAmount.getText().toString()+"");
+                    order.setComment1(binding.etNarration.getText().toString());
+                    order.setModeOfPayment(selectedPayment);
+                    order.setOtherPurity(selectedStandard+"");
 
-                i.putExtra("fine", binding.tvTotalFine.getText().toString()+"");
-                i.putExtra("old_fine", binding.etOldFine.getText().toString()+"");
-                i.putExtra("balance_fine", binding.tvTotalFine.getText().toString()+"");
-                i.putExtra("old_amount", binding.etOldAmount.getText().toString()+"");
-                i.putExtra("comment_1", binding.etNarration.getText().toString()+"");
-                i.putExtra("mode_of_payment", selectedPayment);
-                i.putExtra("other_purity", selectedStandard+"");
+                    OrderHolder.setOrder(order);
+                    finish();
+                }else {
+                    Intent i = new Intent(FinalDetailsActivity.this, PaymentDetailsActivity.class);
+                    i.putExtra("date", getIntent().getStringExtra("date").toString());
+                    i.putExtra("customer", getIntent().getStringExtra("customer").toString());
+                    i.putExtra("address", getIntent().getStringExtra("address").toString());
+                    i.putExtra("customer_id", getIntent().getStringExtra("customer_id").toString());
+                    i.putParcelableArrayListExtra("products", getIntent().getParcelableArrayListExtra("products"));
 
-                startActivity(i);
+/*
+                    i.putExtra("product_id", getIntent().getStringExtra("product_id").toString());
+                    i.putExtra("quantity", getIntent().getStringExtra("quantity").toString());
+                    i.putExtra("gross_weight", getIntent().getStringExtra("gross_weight").toString());
+                    i.putExtra("less_weight", getIntent().getStringExtra("less_weight").toString());
+                    i.putExtra("purity", getIntent().getStringExtra("purity").toString());
+                    i.putExtra("wastage", getIntent().getStringExtra("wastage").toString());
+                    i.putExtra("laboure_rate", getIntent().getStringExtra("laboure_rate").toString());
+                    i.putExtra("rate_on", getIntent().getStringExtra("rate_on").toString());
+                    i.putExtra("laboure_amount", getIntent().getStringExtra("laboure_amount").toString());
+*/
+
+                    i.putExtra("fine", binding.tvTotalFine.getText().toString()+"");
+                    i.putExtra("old_fine", binding.etOldFine.getText().toString()+"");
+                    i.putExtra("balance_fine", binding.tvTotalFine.getText().toString()+"");
+                    i.putExtra("old_amount", binding.etOldAmount.getText().toString()+"");
+                    i.putExtra("comment_1", binding.etNarration.getText().toString()+"");
+                    i.putExtra("mode_of_payment", selectedPayment);
+                    i.putExtra("other_purity", selectedStandard+"");
+                    i.putExtra("selectedPayment", selectedPayment+"");
+
+                    startActivity(i);
+
+                }
+
+
             }
         });
         searchPaymentListener();
@@ -79,9 +115,10 @@ public class FinalDetailsActivity extends AppCompatActivity {
 
 //                String formatted = String.format(Locale.US, "%.3f", getIntent().getStringExtra("fine").toString());
 //                binding.tvFine.setText(calculateFine(Double.parseDouble(formatted), selectedStandard)+"");
-                binding.tvFine.setText(new DecimalFormat("#.000").format(calculateFine(Double.parseDouble(String.format(Locale.US, "%.3f", fine)), selectedStandard))+"");
+                binding.tvFine.setText(new DecimalFormat("0.000").format(calculateFine(Double.parseDouble(String.format(Locale.US, "%.3f", fine)), selectedStandard))+"");
                 updateFine();
-                Log.e("fine.000", new DecimalFormat("#.000").format(calculateFine(Double.parseDouble(String.format(Locale.US, "%.3f", fine)), selectedStandard))+"");
+
+//                Log.e("fine.000", new DecimalFormat("0.000").format(calculateFine(Double.parseDouble(String.format(Locale.US, "%.3f", fine)), selectedStandard))+"");
             }
 
             @Override
@@ -91,6 +128,16 @@ public class FinalDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setSpinnerValue(Spinner spinner, String value) {
+        ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
+        for (int i = 0; i < adapter.getCount(); i++) {
+            if (adapter.getItem(i).toString().equalsIgnoreCase(value)) {
+                spinner.setSelection(i);
+                break;
+            }
+        }
     }
 
     private void textWatcherForTotalFine() {
@@ -163,9 +210,8 @@ public class FinalDetailsActivity extends AppCompatActivity {
         // Handle item click
         binding.searchPaymentMode.setOnItemClickListener((parent, view, position, id) -> {
             selectedPayment = rateAppliedAdapter.getItem(position);
-            Toast.makeText(FinalDetailsActivity.this, "Selected: " +
-                    selectedPayment, Toast.LENGTH_SHORT).show();
+           /* Toast.makeText(FinalDetailsActivity.this, "Selected: " +
+                    selectedPayment, Toast.LENGTH_SHORT).show();*/
         });
     }
-    String selectedPayment = "";
 }
